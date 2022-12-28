@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'package:apple_auth/bloc/auth_bloc.dart';
 import 'package:apple_auth/view/dashboard.dart';
 import 'package:apple_auth/view/sign_up.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -107,29 +111,25 @@ class _SignInState extends State<SignIn> {
                                 const SizedBox(
                                   height: 12,
                                 ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      _authenticateWithEmailAndPassword(
-                                          context);
-                                    },
-                                    child: const Text('Sign In'),
-                                  ),
-                                )
+                                SocialLoginButton(
+                                  backgroundColor: Colors.white,
+                                  height: 50,
+                                  text: 'Sign In',
+                                  borderRadius: 4,
+                                  fontSize: 16,
+                                  textColor: Colors.black87,
+                                  buttonType:
+                                      SocialLoginButtonType.generalLogin,
+                                  imageWidth: 20,
+                                  onPressed: () {
+                                    _authenticateWithEmailAndPassword(context);
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                               ],
                             ),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            _authenticateWithGoogle(context);
-                          },
-                          icon: Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
-                            height: 30,
-                            width: 30,
                           ),
                         ),
                         const Text("Don't have an account?"),
@@ -142,7 +142,74 @@ class _SignInState extends State<SignIn> {
                             );
                           },
                           child: const Text("Sign Up"),
-                        )
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const Text("Or continue with"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(
+                                  width: 0.2,
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                              child: IconButton(
+                                  color: Colors.black87,
+                                  icon: const FaIcon(FontAwesomeIcons.google),
+                                  onPressed: () {
+                                    _authenticateWithGoogle(context);
+                                  }),
+                            ),
+                            Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(
+                                  width: 0.2,
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                              child: IconButton(
+                                  color: Colors.black87,
+                                  icon: const FaIcon(FontAwesomeIcons.apple),
+                                  onPressed: () {
+                                    print("Pressed");
+                                  }),
+                            ),
+                            Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(
+                                  width: 0.2,
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                              child: IconButton(
+                                  color: Colors.black87,
+                                  icon:
+                                      const FaIcon(FontAwesomeIcons.facebookF),
+                                  onPressed: () {
+                                    print("Pressed");
+                                  }),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
