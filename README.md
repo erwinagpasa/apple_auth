@@ -1,3 +1,3 @@
 # apple_auth
 
-![Screenshot](screenshot/signin.png)
+![Screenshot](screenshot/signin.png | width=100)
