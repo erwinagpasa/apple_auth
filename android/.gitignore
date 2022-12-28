@@ -14,6 +14,6 @@ key.properties
 
 
 # Firebase configuration files
-ios/Runner/GoogleService-Info.plist
-android/app/google-services.json
-GoogleService-Info.plist
+# ios/Runner/GoogleService-Info.plist
+# android/app/google-services.json
+# GoogleService-Info.plist
