@@ -1,37 +1,40 @@
-import 'package:apple_auth/apple_sign_in_available.dart';
-import 'package:apple_auth/auth_service.dart';
-import 'package:apple_auth/sign_in_page.dart';
+import 'package:apple_auth/bloc/auth_bloc.dart';
+import 'package:apple_auth/repositories/auth_repository.dart';
+import 'package:apple_auth/view/dashboard.dart';
+import 'package:apple_auth/view/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
-  // Fix for: Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized.
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final appleSignInAvailable = await AppleSignInAvailable.check();
-  runApp(Provider<AppleSignInAvailable>.value(
-    value: appleSignInAvailable,
-    child: const MyApp(),
-  ));
-
-  // runApp(const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Provider<AuthService>(
-      create: (_) => AuthService(),
-      child: MaterialApp(
-        title: 'Apple Sign In with Firebase',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
+    return RepositoryProvider(
+      create: (context) => AuthRepository(),
+      child: BlocProvider(
+        create: (context) => AuthBloc(
+          authRepository: RepositoryProvider.of<AuthRepository>(context),
         ),
-        home: const SignInPage(),
+        child: MaterialApp(
+          home: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                // If the snapshot has user data, then they're already signed in. So Navigating to the Dashboard.
+                if (snapshot.hasData) {
+                  return const Dashboard();
+                }
+                // Otherwise, they're not signed in. Show the sign in page.
+                return const SignIn();
+              }),
+        ),
       ),
     );
   }
