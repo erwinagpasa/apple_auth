@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
-import 'package:apple_auth/repositories/auth_repository.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:apple_auth/repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

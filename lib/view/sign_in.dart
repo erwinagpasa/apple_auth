@@ -27,9 +27,6 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("SignIn"),
-      ),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -61,12 +58,9 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontSize: 38,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Image.asset(
+                          'assets/images/logo.png',
+                          width: 100,
                         ),
                         const SizedBox(
                           height: 18,
