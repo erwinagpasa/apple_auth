@@ -1,3 +1,5 @@
 # apple_auth
 
- <img src="screenshot/signin.png" align="center" width="295" height="639">
+<p align="center">
+<img src="screenshot/signin.png" width="295" height="639">
+</p>
