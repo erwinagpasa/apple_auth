@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:apple_auth/bloc/auth_bloc.dart';
 import 'package:apple_auth/view/dashboard.dart';
 import 'package:apple_auth/view/sign_up.dart';
@@ -31,6 +29,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFf9fcff),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -112,12 +111,12 @@ class _SignInState extends State<SignIn> {
                                   height: 12,
                                 ),
                                 SocialLoginButton(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: const Color(0xFF2f4858),
                                   height: 50,
                                   text: 'Sign In',
                                   borderRadius: 4,
                                   fontSize: 16,
-                                  textColor: Colors.black87,
+                                  textColor: Colors.white,
                                   buttonType:
                                       SocialLoginButtonType.generalLogin,
                                   imageWidth: 20,
@@ -132,16 +131,34 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
-                        const Text("Don't have an account?"),
-                        OutlinedButton(
-                          onPressed: () {
+                        GestureDetector(
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const SignUp()),
                             );
                           },
-                          child: const Text("Sign Up"),
+                          child: const Text.rich(
+                            TextSpan(
+                                //apply style to all
+                                children: [
+                                  TextSpan(
+                                    text: "Don't have an account?",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF2f4858),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' Sign up',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF098c5d),
+                                    ),
+                                  )
+                                ]),
+                          ),
                         ),
                         const SizedBox(
                           height: 50,
@@ -160,12 +177,13 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 border: Border.all(
                                   width: 0.2,
-                                  color: Colors.black,
+                                  color: const Color(0xFFa0b1cd),
                                   style: BorderStyle.solid,
                                 ),
+                                color: const Color(0xFFf3f8fc),
                               ),
                               child: IconButton(
-                                  color: Colors.black87,
+                                  color: const Color(0xFFa0b1cd),
                                   icon: const FaIcon(FontAwesomeIcons.google),
                                   onPressed: () {
                                     _authenticateWithGoogle(context);
@@ -178,16 +196,15 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 border: Border.all(
                                   width: 0.2,
-                                  color: Colors.black,
+                                  color: const Color(0xFFa0b1cd),
                                   style: BorderStyle.solid,
                                 ),
+                                color: const Color(0xFFf3f8fc),
                               ),
                               child: IconButton(
-                                  color: Colors.black87,
+                                  color: const Color(0xFFa0b1cd),
                                   icon: const FaIcon(FontAwesomeIcons.apple),
-                                  onPressed: () {
-                                    print("Pressed");
-                                  }),
+                                  onPressed: () {}),
                             ),
                             Ink(
                               decoration: BoxDecoration(
@@ -196,17 +213,16 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 border: Border.all(
                                   width: 0.2,
-                                  color: Colors.black,
+                                  color: const Color(0xFFa0b1cd),
                                   style: BorderStyle.solid,
                                 ),
+                                color: const Color(0xFFf3f8fc),
                               ),
                               child: IconButton(
-                                  color: Colors.black87,
+                                  color: const Color(0xFFa0b1cd),
                                   icon:
                                       const FaIcon(FontAwesomeIcons.facebookF),
-                                  onPressed: () {
-                                    print("Pressed");
-                                  }),
+                                  onPressed: () {}),
                             ),
                           ],
                         ),
